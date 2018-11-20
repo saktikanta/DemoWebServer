@@ -76,7 +76,7 @@ Create Below directory structure
 ```
 app.py
 ```
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 
 
 import os
@@ -88,15 +88,15 @@ path   = os.path.abspath(os.path.dirname(__file__))
 config = {
   'global' : {
     'server.socket_host' : '127.0.0.1',
-    'server.socket_port' : 8080,
+    'server.socket_port' : 5085,
     'server.thread_pool' : 8,
   },
   '/docs' : {
     'tools.staticdir.on'    : True,
     'tools.staticdir.dir'   : os.path.join(path, 'docs'),
     'tools.staticdir.index' : 'index.html',
-    'tools.gzip.on'         : True  
-  }  
+    'tools.gzip.on'         : True
+  }
 }
 
 
@@ -109,6 +109,7 @@ class App:
 
 if __name__ == '__main__':
   cherrypy.quickstart(App(), '/', config)
+
 ```
 
 docs/index.html
