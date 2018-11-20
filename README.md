@@ -63,3 +63,93 @@ if __name__ == '__main__':
 ```
 Then run the script and check the url http://localhost:5082/generate?length=32 or http://localhost:5082/generate for the expected result.
 
+# Example using static html page
+
+Create Below directory structure
+```
+.
+├── app.py
+└── docs
+    ├── a.html
+    ├── b.html
+    └── index.html
+```
+app.py
+```
+ #!/usr/bin/env python3
+
+
+import os
+
+import cherrypy
+
+
+path   = os.path.abspath(os.path.dirname(__file__))
+config = {
+  'global' : {
+    'server.socket_host' : '127.0.0.1',
+    'server.socket_port' : 8080,
+    'server.thread_pool' : 8,
+  },
+  '/docs' : {
+    'tools.staticdir.on'    : True,
+    'tools.staticdir.dir'   : os.path.join(path, 'docs'),
+    'tools.staticdir.index' : 'index.html',
+    'tools.gzip.on'         : True  
+  }  
+}
+
+
+class App:
+
+  @cherrypy.expose
+  def index(self):
+    return '''Some dynamic content<br/><a href="/docs">See docs</a>'''
+
+
+if __name__ == '__main__':
+  cherrypy.quickstart(App(), '/', config)
+```
+
+docs/index.html
+```
+ <!DOCTYPE html>
+<html>
+<head>
+  <title>Docs index</title>
+</head>
+<body>
+  <p><a href='/'>Back to home page</a> (not relevant from file://)</p>
+  <p><a href='a.html'>See A</a></p>
+  <p><a href='b.html'>See B</a></p>
+</body>
+</html>
+```
+
+docs/a.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A page</title>
+</head>
+<body>
+  <p><a href='index.html'>Back to index</a></p>
+  <p><a href='b.html'>See B</a></p>
+</body>
+</html>
+```
+
+docs/b.html
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>B page</title>
+</head>
+<body>
+  <p><a href='index.html'>Back to index</a></p>
+  <p><a href='a.html'>See A</a></p>
+</body>
+</html>
+```
