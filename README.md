@@ -2,14 +2,14 @@
 To create your own web server using python
 
 Install cherrypy using pip on windows
-```
+```powershell
 pip install cherrypy
 ```
 
 Then write the below python code to display hello world in your webserver and configured port.
 save it in a file name let say my_fisrt_web_server.py
 
-```
+```python
 import cherrypy
 
 config = {
@@ -36,7 +36,7 @@ copy paset the url in the browser. You will see hellow world displayed in the pa
 
 save then below code in a file say myRandom.py
 
-```
+```python
 import random
 import string
 import cherrypy
@@ -66,7 +66,7 @@ Then run the script and check the url http://localhost:5082/generate?length=32 o
 # Example using static html page
 
 Create Below directory structure
-```
+```powershell
 .
 ├── app.py
 └── docs
@@ -75,7 +75,7 @@ Create Below directory structure
     └── index.html
 ```
 app.py
-```
+```python
 #!/usr/bin/env python3
 
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 ```
 
 docs/index.html
-```
+```html
  <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +128,7 @@ docs/index.html
 ```
 
 docs/a.html
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,7 +142,7 @@ docs/a.html
 ```
 
 docs/b.html
-```
+```html
 <!DOCTYPE html>
 <html>
 <head>
